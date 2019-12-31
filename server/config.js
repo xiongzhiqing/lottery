@@ -1,46 +1,51 @@
 let prizes = [{
-        type: 0,
-        count: 100,
-        title: '特别奖',
-        img: '../img/huawei.png'
-    }, {
-        type: 1,
-        count: 1,
-        title: '华为Mate 20X',
-        img: '../img/huawei.png'
-    },
-    {
-        type: 2,
-        count: 2,
-        title: '大疆无人机',
-        img: '../img/spark.jpg'
-    },
-    {
-        type: 3,
-        count: 3,
-        title: 'Kindle',
-        img: '../img/kindle.jpg'
-    },
-    {
-        type: 4,
-        count: 20,
-        title: '小度在家',
-        img: '../img/baidu.jpg'
-    }, {
-        type: 5,
-        title: '凌美钢笔',
-        count: 50,
-        img: '../img/lamy.png'
-    }
+    type: 999,
+    count: 1,
+    title: '特别奖',
+    img: '../img/huawei.png'
+}, {
+    type: 1,
+    count: 1,
+    title: '华为Mate 20X',
+    img: '../img/huawei.png'
+},
+{
+    type: 2,
+    count: 2,
+    title: '大疆无人机',
+    img: '../img/spark.jpg'
+},
+{
+    type: 3,
+    count: 3,
+    title: 'Kindle',
+    img: '../img/kindle.jpg'
+},
+{
+    type: 4,
+    count: 10,
+    title: '小度在家',
+    img: '../img/baidu.jpg'
+}, {
+    type: 5,
+    title: '凌美钢笔',
+    count: 10,
+    img: '../img/lamy.png'
+}, {
+    type: 6,
+    title: 'xxxxx凌美钢笔',
+    count: 10,
+    img: '../img/lamy.png'
+}
 ];
 
 /**
  * 一次抽取的奖品个数
- * 顺序为：[特别奖，一等奖，二等奖，三等奖，四等奖，五等奖]
+ * 顺序为：[特别奖，一等奖，二等奖，三等奖，四等奖，五等奖，六等奖]
  */
-const EACH_COUNT = [1, 1, 1, 1, 1, 5];
+const EACH_COUNT = [1, 1, 2, 3, 10, 10, 10];
 
-const COMPANY = 'MoShang';
+const COMPANY = '尚医智信';
 const ROW_COUNT = 7;
 const COLUMN_COUNT = 17;
 

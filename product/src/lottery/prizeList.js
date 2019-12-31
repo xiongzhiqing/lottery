@@ -25,7 +25,7 @@ class DanMu {
         this.init();
     }
 
-    init() {
+    init () {
         this.element = document.createElement('div');
         this.element.className = 'dan-mu';
         document.body.appendChild(this.element);
@@ -33,13 +33,13 @@ class DanMu {
         this.start();
     }
 
-    setText(text) {
+    setText (text) {
         this.text = text || this.text;
         this.element.textContent = this.text;
         this.width = this.element.clientWidth + 100;
     }
 
-    start(text) {
+    start (text) {
         let speed = ~~(Math.random() * 10000) + 6000;
         this.position = {
             x: MAX_WIDTH
@@ -51,8 +51,8 @@ class DanMu {
         this.element.style.top = ~~(Math.random() * MAX_TOP) + 10 + 'px';
         this.element.classList.add('active');
         this.tween = new TWEEN.Tween(this.position).to({
-                x: -this.width
-            }, speed)
+            x: -this.width
+        }, speed)
             .onUpdate(() => {
                 this.render();
             }).onComplete(() => {
@@ -62,7 +62,7 @@ class DanMu {
 
     }
 
-    render() {
+    render () {
         this.element.style.transform = 'translateX(' + this.position.x + 'px)';
     }
 }
@@ -87,7 +87,7 @@ class Qipao {
         this.init();
     }
 
-    init() {
+    init () {
         this.element = document.createElement('div');
         this.element.className = 'qipao animated';
         this.$par.appendChild(this.element);
@@ -95,12 +95,12 @@ class Qipao {
         this.start();
     }
 
-    setText(text) {
+    setText (text) {
         this.text = text || this.text;
         this.element.textContent = this.text;
     }
 
-    start(text) {
+    start (text) {
         this.setText(text);
         this.element.classList.remove('bounceOutRight');
         this.element.classList.add('bounceInRight');
@@ -115,13 +115,13 @@ class Qipao {
 
 let addQipao = (() => {
     let qipaoList = [];
-    return function(text) {
+    return function (text) {
         let qipao;
         if (qipaoList.length > 0) {
             qipao = qipaoList.shift();
         } else {
             qipao = new Qipao({
-                onComplete() {
+                onComplete () {
                     qipaoList.push(qipao);
                 }
             });
@@ -131,23 +131,23 @@ let addQipao = (() => {
     }
 })();
 
-function setPrizes(pri) {
+function setPrizes (pri) {
     prizes = pri;
-    defaultType = prizes[0]['type'];
+    // defaultType = prizes[0]['type'];
     lasetPrizeIndex = pri.length - 1;
 }
 
-function showPrizeList(currentPrizeIndex) {
+function showPrizeList (currentPrizeIndex) {
     let currentPrize = prizes[currentPrizeIndex];
     if (currentPrize.type === defaultType) {
         currentPrize.count === '不限制';
     }
-    let htmlCode = `<div class="prize-mess">正在抽取<label id="prizeType" class="prize-shine">${currentPrize.type +'等奖'}</label><label id="prizeText" class="prize-shine">${currentPrize['title']}</label>，剩余<label id="prizeLeft" class="prize-shine">${currentPrize['count']}</label>个</div><ul class="prize-list">`;
+    let htmlCode = `<div class="prize-mess">正在抽取<label id="prizeType" class="prize-shine">${currentPrize.type + '等奖'}</label><label id="prizeText" class="prize-shine">${currentPrize['title']}</label>，剩余<label id="prizeLeft" class="prize-shine">${currentPrize['count']}</label>个</div><ul class="prize-list">`;
     prizes.forEach(item => {
         if (item.type === defaultType) {
             return true;
         }
-        htmlCode += `<li id="prize-item-${item.type}" class="prize-item ${(item.type == currentPrize.type ? "shine": '')}">
+        htmlCode += `<li id="prize-item-${item.type}" class="prize-item ${(item.type == currentPrize.type ? "shine" : '')}">
                         <div class="prize-img">
                             <img src="${item.img}" alt="${item.title}">
                         </div>
@@ -170,14 +170,14 @@ function showPrizeList(currentPrizeIndex) {
     document.querySelector('#prizeBar').innerHTML = htmlCode;
 }
 
-function resetPrize(currentPrizeIndex) {
+function resetPrize (currentPrizeIndex) {
     prizeElement = {};
     lasetPrizeIndex = currentPrizeIndex;
     showPrizeList(currentPrizeIndex);
 }
 
-let setPrizeData = (function() {
-    return function(currentPrizeIndex, count, isInit) {
+let setPrizeData = (function () {
+    return function (currentPrizeIndex, count, isInit) {
         let currentPrize = prizes[currentPrizeIndex],
             type = currentPrize.type,
             elements = prizeElement[type],
@@ -234,14 +234,14 @@ let setPrizeData = (function() {
     }
 }());
 
-function startMaoPao() {
+function startMaoPao () {
     let len = DEFAULT_MESS.length,
         count = 5,
         index = ~~(Math.random() * len),
         danmuList = [],
         total = 0;
 
-    function restart() {
+    function restart () {
         total = 0;
         danmuList.forEach(item => {
             let text = lastDanMuList.length > 0 ? lastDanMuList.shift() : DEFAULT_MESS[index++];
@@ -255,7 +255,7 @@ function startMaoPao() {
         setTimeout(() => {
             danmuList.push(new DanMu({
                 text: DEFAULT_MESS[index++],
-                onComplete: function() {
+                onComplete: function () {
                     setTimeout(() => {
                         this.start(DEFAULT_MESS[index++]);
                         index = index > len ? 0 : index;
@@ -267,7 +267,7 @@ function startMaoPao() {
     }
 }
 
-function addDanMu(text) {
+function addDanMu (text) {
     lastDanMuList.push(text);
 }
 

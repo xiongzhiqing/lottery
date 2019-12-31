@@ -133,7 +133,7 @@ let addQipao = (() => {
 
 function setPrizes (pri) {
     prizes = pri;
-    // defaultType = prizes[0]['type'];
+    defaultType = prizes[0]['type'];
     lasetPrizeIndex = pri.length - 1;
 }
 

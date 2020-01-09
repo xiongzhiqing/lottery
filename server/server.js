@@ -116,7 +116,7 @@ router.post('/errorData', (req, res, next) => {
 
 // 保存数据到excel中去
 router.post('/export', (req, res, next) => {
-    let type = [1, 2, 3, 4, 5, defaultType],
+    let type = cfg.prizes.map(prize => prize.type),
         outData = [
             ['工号', '姓名', '部门']
         ];
@@ -159,12 +159,12 @@ router.all('*', (req, res) => {
     }
 });
 
-function log(text) {
+function log (text) {
     global.console.log(text);
     global.console.log("-----------------------------------------------");
 }
 
-function setLucky(type, data) {
+function setLucky (type, data) {
     if (luckyData[type]) {
         luckyData[type] = luckyData[type].concat(data);
     } else {
@@ -174,7 +174,7 @@ function setLucky(type, data) {
     return saveDataFile(luckyData);
 }
 
-function setErrorData(data) {
+function setErrorData (data) {
     errorData = errorData.concat(data);
 
     return saveErrorDataFile(errorData);
@@ -182,7 +182,7 @@ function setErrorData(data) {
 
 app.use(router);
 
-function loadData() {
+function loadData () {
     console.log('加载EXCEL数据文件')
     let cfgData = {};
 
@@ -197,7 +197,7 @@ function loadData() {
     });
 }
 
-function getLeftUsers() {
+function getLeftUsers () {
     //  记录当前已抽取的用户
     let lotteredUser = {};
     for (let key in luckyData) {

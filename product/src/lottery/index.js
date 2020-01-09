@@ -9,9 +9,9 @@ const ROTATE_TIME = 2000
 let presets = [
     {
         // 指定员工编号（预设中奖者编号中存在的特殊标识符）
-        ASSIGN_KEY: 'SYZX',
+        ASSIGN_KEY: 'hhr',
         // 指定奖项
-        type: 6,
+        type: 9,
         // 指定类型人员抽取指定奖项
         running: true,
         // 开始抽取指定人员(只执行一次)
@@ -20,13 +20,81 @@ let presets = [
         runCount: 0
     },
     {
-        ASSIGN_KEY: 'abcd',
+        // 指定员工编号（预设中奖者编号中存在的特殊标识符）
+        ASSIGN_KEY: 'bj',
+        // 指定奖项
+        type: 1,
+        // 指定类型人员抽取指定奖项
+        running: true,
+        // 开始抽取指定人员(只执行一次)
+        runAssign: false,
+        // 当前是抽取的第几次
+        runCount: 0
+    },
+    {
+        // 指定员工编号（预设中奖者编号中存在的特殊标识符）
+        ASSIGN_KEY: 'bj',
+        // 指定奖项
+        type: 2,
+        // 指定类型人员抽取指定奖项
+        running: true,
+        // 开始抽取指定人员(只执行一次)
+        runAssign: false,
+        // 当前是抽取的第几次
+        runCount: 0
+    },
+    {
+        // 指定员工编号（预设中奖者编号中存在的特殊标识符）
+        ASSIGN_KEY: 'bj',
+        // 指定奖项
         type: 5,
+        // 指定类型人员抽取指定奖项
+        running: true,
+        // 开始抽取指定人员(只执行一次)
+        runAssign: false,
+        // 当前是抽取的第几次
+        runCount: 0
+    },
+    {
+        // 指定员工编号（预设中奖者编号中存在的特殊标识符）
+        ASSIGN_KEY: 'bj',
+        // 指定奖项
+        type: 8,
+        // 指定类型人员抽取指定奖项
+        running: true,
+        // 开始抽取指定人员(只执行一次)
+        runAssign: false,
+        // 当前是抽取的第几次
+        runCount: 0
+    },
+    {
+        // 指定员工编号（预设中奖者编号中存在的特殊标识符）
+        ASSIGN_KEY: 'bj',
+        // 指定奖项
+        type: 2,
+        // 指定类型人员抽取指定奖项
+        running: true,
+        // 开始抽取指定人员(只执行一次)
+        runAssign: false,
+        // 当前是抽取的第几次
+        runCount: 0
+    },
+    {
+        ASSIGN_KEY: 'hhr',
+        type: 11,
         // 指定类型人员抽取指定奖项
         running: true,
         runAssign: false,
         runCount: 0
     },
+    {
+        ASSIGN_KEY: 'zj xht',
+        type: 10,
+        // 指定类型人员抽取指定奖项
+        running: true,
+        runAssign: false,
+        runCount: 0
+    }
 ]
 // 重置时使用
 const resetPresets = JSON.parse(JSON.stringify(presets))
@@ -250,6 +318,7 @@ function bindEvent () {
                 break
             // 抽奖
             case 'lottery':
+                if (currentPrizeIndex === 1) return addQipao(`奖品抽完了`)
                 setLotteryStatus(true)
                 // 每次抽奖前先保存上一次的抽奖数据
                 saveData()
@@ -347,8 +416,8 @@ function createCard (user, isBold, id, showTable) {
     element.appendChild(createElement('company', COMPANY))
 
     element.appendChild(createElement('name', user[1]))
-
-    element.appendChild(createElement('details', user[0] + '<br/>' + user[2]))
+    // replace 去除工号里面的字母
+    element.appendChild(createElement('details', user[0]))
     return element
 }
 
@@ -552,13 +621,23 @@ function lottery () {
             basicData.leftUsers = basicData.users
             leftCount = basicData.leftUsers.length
         }
-        // 二等奖 单独走特定逻辑,获取指定编号的用户
+        // 单独走特定逻辑,获取指定编号的用户
         let assignUsers = []
         let assignUsersCount
         // 当前预设中奖信息
         currentPreset = presets.find(set => (set.type === currentPrizeIndex - 0))
         if (currentPreset) { // 当前指定奖项
-            assignUsers = basicData.leftUsers.filter(user => user[0].indexOf(currentPreset.ASSIGN_KEY.toLowerCase()) > -1)
+            const assignKeys = currentPreset.ASSIGN_KEY.split(' ')
+            if (assignKeys.length > 1) {
+                basicData.leftUsers.forEach(user => {
+                    if (assignKeys.some(key => user[0].indexOf(key.toUpperCase()) > -1)) {
+                        assignUsers.push(user)
+                    }
+                })
+
+            } else {
+                assignUsers = basicData.leftUsers.filter(user => user[0].indexOf(currentPreset.ASSIGN_KEY.toUpperCase()) > -1)
+            }
             assignUsersCount = assignUsers.length
             if (!currentPreset.runAssign && currentPreset.running) {
                 currentPreset.runAssign = true
@@ -647,7 +726,7 @@ function random (num) {
 function changeCard (cardIndex, user) {
     let card = threeDCards[cardIndex].element
 
-    card.innerHTML = `<div class="company">${COMPANY}</div><div class="name">${user[1]}</div><div class="details">${user[0]}<br/>${user[2] || 'PSST'}</div>`
+    card.innerHTML = `<div class="company">${COMPANY}</div><div class="name">${user[1]}</div><div class="details">${user[0]}</div>`
 }
 
 /**

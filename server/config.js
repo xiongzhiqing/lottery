@@ -1,51 +1,77 @@
-let prizes = [{
-    type: 0,
-    count: 1,
-    title: '特别奖',
-    img: '../img/huawei.png'
-}, {
-    type: 1,
-    count: 1,
-    title: '华为Mate 20X',
-    img: '../img/huawei.png'
-},
-{
-    type: 2,
-    count: 2,
-    title: '大疆无人机',
-    img: '../img/spark.jpg'
-},
-{
-    type: 3,
-    count: 3,
-    title: 'Kindle',
-    img: '../img/kindle.jpg'
-},
-{
-    type: 4,
-    count: 10,
-    title: '小度在家',
-    img: '../img/baidu.jpg'
-}, {
-    type: 5,
-    title: '凌美钢笔',
-    count: 10,
-    img: '../img/lamy.png'
-}, {
-    type: 6,
-    title: 'xxxxx凌美钢笔',
-    count: 10,
-    img: '../img/lamy.png'
-}
+let prizes = [
+    {
+        type: 0,
+        count: 1,
+        title: '森海塞尔耳机',
+        img: '../img/1.jpg'
+    }, {
+        type: 1,
+        count: 1,
+        title: '森海塞尔耳机',
+        img: '../img/1.jpg'
+    }, {
+        type: 2,
+        count: 1,
+        title: '罗技机械键盘',
+        img: '../img/2.jpg'
+    },
+    {
+        type: 3,
+        count: 1,
+        title: '黄金转运珠手链',
+        img: '../img/3.jpg'
+    },
+    {
+        type: 4,
+        count: 1,
+        title: '小米平衡车',
+        img: '../img/4.jpg'
+    },
+    {
+        type: 5,
+        count: 1,
+        title: 'RealForce 燃风键盘',
+        img: '../img/5.jpg'
+    }, {
+        type: 6,
+        title: 'Prada 卡包',
+        count: 1,
+        img: '../img/6.jpg'
+    }, {
+        type: 7,
+        title: 'Bose 智能音频眼镜蓝牙耳机',
+        count: 1,
+        img: '../img/7.jpg'
+    }, {
+        type: 8,
+        title: '傲胜 按摩椅垫',
+        count: 2,
+        img: '../img/8.jpg'
+    }, {
+        type: 9,
+        title: '外交官 行李箱',
+        count: 3,
+        img: '../img/9.jpg'
+    }, {
+        type: 10,
+        title: '红包',
+        count: 15,
+        img: '../img/10.jpg'
+    }, {
+        type: 11,
+        title: '红包',
+        count: 15,
+        img: '../img/10.jpg'
+    }
 ];
 
 /**
  * 一次抽取的奖品个数
  * 顺序为：[特别奖，一等奖，二等奖，三等奖，四等奖，五等奖，六等奖]
  */
-const EACH_COUNT = [5, 1, 2, 3, 10, 10, 10];
+const EACH_COUNT = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5];
 
-const COMPANY = '尚医智信';
+const COMPANY = '';
 const ROW_COUNT = 7;
 const COLUMN_COUNT = 17;
 

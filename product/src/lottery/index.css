@@ -200,14 +200,14 @@ button:active {
     border: 1px solid rgba(127, 255, 255, 0.25);
     color: rgba(127, 255, 255, 0.75);
     width: 30vh;
-    height: 10vh;
+    height: 6vh;
     box-sizing: border-box;
     transition: transform 1s ease-in;
 }
 
 .prize-item .prize-img {
-    width: 8vh;
-    height: 8vh;
+    width: 6vh;
+    height: 6vh;
     margin-right: 1.2vh;
     border-radius: 50%;
     background-color: #fff;
@@ -230,7 +230,7 @@ button:active {
 
 .prize-title {
     margin: 4px 0;
-    font-size: 1.8vh;
+    font-size: 1vh;
 }
 
 .prize-count {
@@ -239,19 +239,19 @@ button:active {
 }
 
 .prize-count .progress {
-    height: 1.8vh;
+    height: 1vh;
     background: rgba(0, 0, 0, .5);
     padding: 1px;
     overflow: visible;
-    border-radius: 1vh;
+    border-radius: 0.8vh;
 }
 
 .progress .progress-bar {
-    border-radius: 1.8vh;
+    border-radius: 1vh;
     position: relative;
     animation: animate-positive 2s;
     background-color: #d9534f;
-    height: 1.8vh;
+    height: 1vh;
     -webkit-transition: width .6s ease;
     -o-transition: width .6s ease;
     transition: width .6s ease;

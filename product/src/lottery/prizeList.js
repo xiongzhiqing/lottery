@@ -133,7 +133,7 @@ let addQipao = (() => {
 
 function setPrizes (pri) {
     prizes = pri;
-    defaultType = prizes[0]['type'];
+    // defaultType = prizes[0]['type'];
     lasetPrizeIndex = pri.length - 1;
 }
 
@@ -142,7 +142,7 @@ function showPrizeList (currentPrizeIndex) {
     if (currentPrize.type === defaultType) {
         currentPrize.count === '不限制';
     }
-    let htmlCode = `<div class="prize-mess">正在抽取<label id="prizeType" class="prize-shine">${currentPrize.type + '等奖'}</label><label id="prizeText" class="prize-shine">${currentPrize['title']}</label>，剩余<label id="prizeLeft" class="prize-shine">${currentPrize['count']}</label>个</div><ul class="prize-list">`;
+    let htmlCode = `<div class="prize-mess">正在抽取<label id="prizeType" class="prize-shine">${currentPrize.type > 6 ? (currentPrize.type - 6) + '等奖' : ''}</label><label id="prizeText" class="prize-shine">${currentPrize['title']}</label>，剩余<label id="prizeLeft" class="prize-shine">${currentPrize['count']}</label>个</div><ul class="prize-list">`;
     prizes.forEach(item => {
         if (item.type === defaultType) {
             return true;
@@ -152,7 +152,7 @@ function showPrizeList (currentPrizeIndex) {
                             <img src="${item.img}" alt="${item.title}">
                         </div>
                         <div class="prize-text">
-                            <h5 class="prize-title">${item.type}等奖 ${item.title}</h5>
+                            <h5 class="prize-title">${item.type > 6 ? (item.type - 6) + '等奖' : ''} ${item.title}</h5>
                             <div class="prize-count">
                                 <div class="progress">
                                     <div id="prize-bar-${item.type}" class="progress-bar progress-bar-danger progress-bar-striped active" style="width: 100%;">
@@ -213,18 +213,18 @@ let setPrizeData = (function () {
             lastBox.classList.remove('shine');
             lastBox.classList.add('done');
             elements.box && elements.box.classList.add('shine');
-            prizeElement.prizeType.textContent = currentPrize.type + '等奖';
+            prizeElement.prizeType.textContent = currentPrize.type > 6 ? (currentPrize.type - 6) + '等奖' : '';
             prizeElement.prizeText.textContent = currentPrize.title;
 
             lasetPrizeIndex = currentPrizeIndex;
         }
 
-        if (currentPrizeIndex === 0) {
-            prizeElement.prizeType.textContent = '特别奖';
-            prizeElement.prizeText.textContent = ' ';
-            prizeElement.prizeLeft.textContent = '不限制';
-            return;
-        }
+        // if (currentPrizeIndex === 0) {
+        //     prizeElement.prizeType.textContent = '特别奖';
+        //     prizeElement.prizeText.textContent = ' ';
+        //     prizeElement.prizeLeft.textContent = '不限制';
+        //     return;
+        // }
 
         count = totalCount - count;
         let percent = (count / totalCount).toFixed(2);
